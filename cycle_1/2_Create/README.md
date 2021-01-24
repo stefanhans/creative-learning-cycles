@@ -5,9 +5,8 @@
 You need 
 
 - a project on [Google Cloud Platform](https://console.cloud.google.com/) 
-- a project on [Cloud Firebase](https://console.firebase.google.com/) with 
-    - a Cloud Firestore database 
-    - [firebase-tools](https://firebase.google.com/docs/cli)
+- a project on [Cloud Firebase](https://console.firebase.google.com/)
+
 ---
 
 Set environment variables
@@ -47,7 +46,7 @@ gcloud config configurations list
 ```
 ---
 
-Initialize Firebase CLI for Firestore
+Initialize Firebase CLI for Firestore, i.e. [firebase-tools](https://firebase.google.com/docs/cli)
 ```bash
 firebase login
 firebase init firestore # choose the appropriate or the default resp.
