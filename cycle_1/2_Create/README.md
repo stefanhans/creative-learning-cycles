@@ -20,17 +20,14 @@ export GCP_ACCOUNT="<my_gcp_account>"
 export GCP_SA_NAME="<my_service_account_name>"
 
 export LOCAL_CREDENTIALS_DIR="<local credentials directory>"
-
-export FIREBASE_PROJECT="<my_firebase_project>"
-export FIREBASE_DB_INSTANCE="<my_firebase_db_instance>"
 ```
 ---
 
-Create gcloud configuration for Firebase Project
+Create gcloud configuration
 ```bash
 gcloud config configurations list
 
-gcloud config configurations create ${FIREBASE_PROJECT}
+gcloud config configurations create ${GCP_PROJECT}
 
 gcloud config configurations list
 ```
@@ -50,25 +47,25 @@ gcloud config configurations list
 ```
 ---
 
-Initialize Firebase CLI
+Initialize Firebase CLI for Firestore
 ```bash
 firebase login
-firebase init                         # choose the appropriate or the default resp.
+firebase init firestore # choose the appropriate or the default resp.
 
 firebase projects:list
-firebase use ${FIREBASE_PROJECT}
+firebase use ${GCP_PROJECT}
 ```
+
 ---
 
-Create a database instance
+Create the database by `gcloud`
 ```bash
-firebase database:instances:create ${FIREBASE_DB_INSTANCE}
-firebase database:instances:list
-
-firebase projects:addfirebase
+gcloud firestore databases create --region=${GCP_REGION}
 ```
 
-Check respectively change Firestore rules
+---
+
+Check respectively change Firestore rules in `firestore.rules`
 ```text
 rules_version = '2';
 service cloud.firestore {
@@ -78,6 +75,11 @@ service cloud.firestore {
     }
   }
 }
+```
+
+Deploy if changed
+```bash
+firebase deploy --only firestore:rules
 ```
 
 
@@ -95,9 +97,6 @@ gcloud projects add-iam-policy-binding ${GCP_PROJECT} \
       
 gcloud iam service-accounts keys create ${LOCAL_CREDENTIALS_DIR}/${GCP_PROJECT}-${GCP_SA_NAME}.json \
   --iam-account ${GCP_SA_NAME}@${GCP_PROJECT}.iam.gserviceaccount.com
-  
-export GOOGLE_APPLICATION_CREDENTIALS="${LOCAL_CREDENTIALS_DIR}/${GCP_PROJECT}-${GCP_SA_NAME}.json"
-ls -l $GOOGLE_APPLICATION_CREDENTIALS
 ```
 
 ### Cloud Function
@@ -144,8 +143,6 @@ gcloud functions describe add-document --region "${GCP_REGION}" --format='value(
 curl <url> -d '{"data": "my value"}'
 
 ```
-
-
 
 ---
 
