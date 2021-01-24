@@ -145,36 +145,11 @@ curl <url> -d '{"data": "my value"}'
 
 ```
 
---------
-------
 
 
-Change Firestore rules
-```text
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if request.auth != null;
-    }
-  }
-}
-```
+---
 
-old rules
-```text
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if request.auth.uid == "114690088071785841349";
-    }
-  }
-}
-```
-
-
-
+Next [Play](cycle_1/3_Play/README.md)
 
 
 

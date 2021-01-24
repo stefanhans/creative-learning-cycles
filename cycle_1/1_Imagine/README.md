@@ -23,3 +23,7 @@ to a Cloud Function in Go
 gcloud functions deploy store-data ...
 ```
  and store it in Firestore.
+ 
+---
+
+Next [Create](cycle_1/2_Create/README.md)

@@ -1,0 +1,60 @@
+package functions
+
+import (
+	"cloud.google.com/go/firestore"
+	"context"
+	"fmt"
+	"io/ioutil"
+	"net/http"
+)
+
+// Implement struct of request/data here, e.g.
+type RequestData struct {
+	Data       string `firestore:"data"`
+}
+
+func FunctionName(w http.ResponseWriter, r *http.Request) {
+
+	// Gets Google Cloud Platform project ID
+	gcpProject := os.Getenv("GCP_PROJECT")
+	if gcpProject == "" {
+		http.Error(w, fmt.Sprintf("internal error: GCP_PROJECT environment variable missing"), http.StatusInternalServerError)
+		return
+	}
+
+	// Read the request body
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("failed to read request: %s", err), http.StatusInternalServerError)
+		return
+	}
+
+	// Unmarshal request body
+	bytes := []byte(string(body))
+	var dataRequest Data
+	err = json.Unmarshal(bytes, &dataRequest)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("cannot unmarshall JSON input: %s", err), http.StatusInternalServerError)
+		return
+	}
+
+	// Get a Firestore client.
+	ctx := context.Background()
+
+	client, err := firestore.NewClient(ctx, gcpProject)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("failed to create client: %s", err), http.StatusInternalServerError)
+		return
+	}
+
+	// Implement functionality here
+	_ = client
+
+
+
+	// Response
+	_, err = fmt.Fprintf(w, "implement the response", )
+	if err != nil {
+		http.Error(w, fmt.Sprintf("failed to write response: %s", err), http.StatusInternalServerError)
+	}
+}
