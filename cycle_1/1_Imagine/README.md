@@ -26,4 +26,4 @@ gcloud functions deploy store-data ...
  
 ---
 
-Next [Create](../2_Create/README.md)
+Next [Create](../2_Create/README.md#create)
