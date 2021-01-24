@@ -20,7 +20,7 @@ and you can start again.
 
 So, let's start right away
 
-## <a id="cycles"></a>Cycles 
+## Cycles 
 
 - [Send a JSON object via HTTPS request to a Cloud Function in Go and save it in Firestore](cycle_1/README.md)
 
