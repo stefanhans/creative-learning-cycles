@@ -94,4 +94,4 @@ Let's find out how using `main.go` - save the old one under `main/path-and-type.
  
 ---
 
-Next [Share](cycle_1/4_Share/README.md)
+Next [Share](../4_Share/README.md)

@@ -149,7 +149,7 @@ curl <url> -d '{"data": "my value"}'
 
 ---
 
-Next [Play](cycle_1/3_Play/README.md)
+Next [Play](../3_Play/README.md)
 
 
 
